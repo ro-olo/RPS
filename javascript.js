@@ -2,8 +2,6 @@ let getComputerChoice = ['rock', 'paper', 'scissors'];
 
 let computerSelection = Math.floor(Math.random() * getComputerChoice.length);
 
-//console.log(computerSelection, getComputerChoice[computerSelection]);
-
 function rules(computerSelection, playerSelection) {
     
     if (playerSelection == computerSelection) {
@@ -32,12 +30,10 @@ function rules(computerSelection, playerSelection) {
 }
 
 
-const buttons = document.querySelectorAll('button');
+const buttons = document.querySelectorAll('.choice');
 buttons.forEach((button) => {
     button.addEventListener('click', () => {
         playerSelection = button.value;
-        console.log("button press")
-        console.log("This pressed button has this value" + button.value);
         playGame();
     })
 
@@ -49,10 +45,16 @@ buttons.forEach((button) => {
         button.classList.remove("hover");
     })
 })
-console.log(buttons)
 
-let playerScore = 0;
-let computerScore = 0;
+
+
+let playerScoreIn = 0;
+let computerScoreIn = 0;
+let playerScore = document.querySelector("#playerScore");
+playerScore.textContent="0";
+let computerScore = document.querySelector("#computerScore");
+computerScore.textContent="0";
+
 
     
 function playGame() {
@@ -60,26 +62,43 @@ function playGame() {
         let computerSelection = Math.floor(Math.random() * getComputerChoice.length);
         console.log('computer choice ----- '+ getComputerChoice[computerSelection])
         let result = rules( getComputerChoice[computerSelection], playerSelection);
-        console.log(result)
-        alert(result);
+        console.log(result);
+        roundResult.textContent = result;
 
         if (result.includes('won')) {
-            playerScore += 1;
+            playerScoreIn += 1;
+            playerScore.textContent = playerScoreIn;
         } else if (result.includes('lost')) {
-            computerScore += 1;
-        }
-    } 
-    // console.log(playerScore);
-    // console.log(computerScore);
+            computerScoreIn += 1;
+            computerScore.textContent = computerScoreIn;
+        };
+        //CODICE PER SETTARE IL BOTTONE
+        
 
-    // if (playerScore > computerScore) {
-    //     console.log('You won the game!');
-    //     alert('You won the game!');
-    // } else if (playerScore < computerScore) {
-    //     console.log('Game over. You lost!');
-    //     alert('Game over. You lost!');
-    // } else {
-    //     console.log('Tie!');
-    //     alert('Tie!');
+         if (playerScoreIn == 5) {
+            console.log('You won the game!');
+            gameResult.textContent = 'You won the game!';
+            again.removeAttribute("hidden");
+        } else if (computerScoreIn == 5) {
+            console.log('Game over. You lost!');
+            gameResult.textContent = 'Game over. You lost!';
+            again.removeAttribute("hidden");
+        } 
+    }
 
-    // }
+    again.addEventListener("click", function() {
+        playerScoreIn = 0;
+        computerScoreIn = 0;
+        playerScore.textContent = "0";
+        computerScore.textContent = "0";
+        again.setAttribute("hidden", true);
+        roundResult.textContent = '';
+        gameResult.textContent = '';
+    });
+
+    function toggleRoundButton(){
+        buttonHidden = buttonRound.getAttribute("hidden");
+        buttonRound.setAttribute("hidden" ,!buttonHidden);
+    }
+
+    
