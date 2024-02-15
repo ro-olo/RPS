@@ -1,0 +1,48 @@
+* {
+    font-family: Verdana, Tahoma, sans-serif;
+    color: white;
+    background-color: black;
+}
+
+.game {
+    display:flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    padding: 30px;
+    margin: 100px;
+    background-color: rgb(0, 0, 0);
+    text-align: center;
+    width: 500px;
+}
+
+.selection {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    gap: 70px;
+    margin-top: 70px;
+
+}
+
+button {
+    width: 100px;
+    height: 100px;
+    border-radius: 50px;
+    background-color: blueviolet;
+    border: 2px solid white;
+}
+
+button#R {
+    background-image: url(images/Pugno.png);
+
+}
+body {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+}
+.hover {
+    color: red;
+    box-shadow:  5px 5px rgba(255, 255, 255, 0.27);
+}

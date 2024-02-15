@@ -1,0 +1,19 @@
+Create a function which gives you 'Rock', 'Paper', 'Scissors' randomly played by the computer:
+Create an array with the three values
+Get a random value from the array
+
+Create a function to play the round
+computerSelection and playerSelection will be the two parameters
+Create an if function to declare the conditions of the game
+Write a return function inside the if function
+
+Create a function to play the game
+Set at 0 the initial scores outside of the loop in order not to refresh it at every round
+Create a loop function
+Set the parameters of the five rounds
+Create a prompt which declares the round and the text 
+Write the function which will give you random values for the computerSelection
+Write an alert to display the score of the round
+Create an if function to count and increase the score at each round
+Create an if function to compare the scores in order to declare a winner
+Write an alert to display the result of the game
