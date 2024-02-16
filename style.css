@@ -60,9 +60,6 @@ button#S {
     background-size: cover;
 }
 
-.choice:active {
-    transform: translateY(2px);
-}
 
 body {
     display: flex;
@@ -78,6 +75,7 @@ body {
     border-color: rgb(158, 0, 183);
     opacity: 0.9;
     filter: alpha(opacity=100);
+    transform: translateY(3px);
 }
 
 .scores, .match {

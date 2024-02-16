@@ -147,9 +147,4 @@ function playGame() {
         computer.textContent = "";
     });
 
-    function toggleRoundButton(){
-        buttonHidden = buttonRound.getAttribute("hidden");
-        buttonRound.setAttribute("hidden" ,!buttonHidden);
-    }
-
     
