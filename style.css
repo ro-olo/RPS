@@ -26,7 +26,7 @@
     justify-content: center;
     gap: 70px;
     margin-top: 70px;
-    margin-bottom: 70px;
+    margin-bottom: 50px;
 
 }
 
@@ -38,6 +38,13 @@ button {
     border: 2px solid white;
 }
 
+.go:hover, .again:hover {
+    box-shadow: 0 5px 5px 0 rgba(9, 255, 0, 0.24), 0 5px 5px 0 rgba(0, 255, 0, 0.19);
+}
+
+.again:active {
+    transform: translateY(2px);
+}
 button#R {
     background-image: url(images/rock.jpg);
     background-size: cover;
@@ -53,21 +60,38 @@ button#S {
     background-size: cover;
 }
 
+.choice:active {
+    transform: translateY(2px);
+}
+
 body {
     display: flex;
     align-content: center;
     justify-content: center;
 }
+
 .hover {
     border: 3px solid rgb(47, 249, 2);
 }
 
-.scores {
+.choice:focus{
+    border-color: rgb(158, 0, 183);
+    opacity: 0.9;
+    filter: alpha(opacity=100);
+}
+
+.scores, .match {
     display: flex;
     align-items: center;
     justify-content: space-between;
     width: 500px;
     background-color: rgb(0, 0, 0);
+}
+
+.match {
+    justify-content: center;
+    margin-bottom: 10px;
+    gap: 15px;
 }
 
 .again, .go {
@@ -84,6 +108,7 @@ body {
 
 .results {
     margin: 30px;
+    margin-bottom: 10px;
 }
 
 #roundResult {

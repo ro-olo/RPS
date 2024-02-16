@@ -35,14 +35,15 @@ buttons.forEach((button) => {
     button.disabled = true;
     button.addEventListener('click', () => {
         playerSelection = button.value;
+        disableChoiceButton();
         playGame();
     })
 
     button.addEventListener('mouseenter', () => {
-       // button.classList.add('hover');
-        if (button.disabled = false) {
+        button.classList.add('hover');
+        if (button.disabled == false) {
             button.classList.add('hover');
-        } else if (button.disabled = true) {
+        } else if (button.disabled == true) {
             button.classList.remove('hover');
         }
     })
@@ -50,6 +51,13 @@ buttons.forEach((button) => {
         button.classList.remove('hover');
     })
 })
+
+function disableChoiceButton(){
+    buttons.forEach(element => {
+        element.disabled=true;
+        
+    });
+}
 
 const go = document.querySelector('.go');
 const again = document.querySelector('.again');
@@ -74,8 +82,6 @@ let playerScore = document.querySelector("#playerScore");
 playerScore.textContent="0";
 let computerScore = document.querySelector("#computerScore");
 computerScore.textContent="0";
-
-
     
 function playGame() {
         console.log("first" + playerSelection);
@@ -94,6 +100,8 @@ function playGame() {
         };
         
         go.style.display = "inline-block";
+        player.textContent = playerSelection;
+        computer.textContent = getComputerChoice[computerSelection];
         
          if (playerScoreIn == 5) {
             console.log('You won the game!');
@@ -135,6 +143,8 @@ function playGame() {
         game.classList.remove("loser");
         game.classList.remove("winner");
         go.style.display = "inline-block";
+        player.textContent = "";
+        computer.textContent = "";
     });
 
     function toggleRoundButton(){
