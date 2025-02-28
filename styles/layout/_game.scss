@@ -1,0 +1,53 @@
+// Game container
+.game {
+  @include game-container;
+  border: 2px solid $text-color;
+  border-radius: 15px;
+
+  &.winner {
+    border-color: $success-color !important;
+  }
+
+  &.loser {
+    border-color: $error-color !important;
+  }
+}
+
+// Selection area
+.selection {
+  @include flex-center;
+  gap: $gap-large;
+  margin-top: 40px;
+  margin-bottom: 30px;
+}
+
+// Match display
+.match {
+  @include flex-center;
+  gap: $gap-medium;
+  margin: $gap-small 0;
+}
+
+// Scores
+.scores {
+  @include flex-center;
+  gap: 50px;
+  margin: $gap-small 0;
+}
+
+// Results
+.results {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $gap-small;
+  margin: $gap-small 0;
+
+  #roundResult, #gameResult {
+    margin: 5px 0;
+    font-size: 1.1em;
+    word-wrap: break-word;
+    max-width: 100%;
+    padding: 0 $gap-medium;
+  }
+}

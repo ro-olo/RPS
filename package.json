@@ -1,0 +1,24 @@
+{
+  "name": "rps",
+  "version": "1.0.0",
+  "description": "A modern implementation of the classic Rock Paper Scissors game, featuring a clean UI and smooth animations.",
+  "main": "javascript.js",
+  "scripts": {
+    "sass": "sass --no-source-map styles/main.scss:css/style.css --watch",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ro-olo/RPS.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ro-olo/RPS/issues"
+  },
+  "homepage": "https://github.com/ro-olo/RPS#readme",
+  "devDependencies": {
+    "sass": "^1.71.1"
+  }
+}

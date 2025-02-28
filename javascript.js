@@ -1,150 +1,177 @@
-let getComputerChoice = ['rock', 'paper', 'scissors'];
+// Game class to handle the core game logic
+class Game {
+    constructor() {
+        this.choices = ['rock', 'paper', 'scissors'];
+        this.playerScore = 0;
+        this.computerScore = 0;
+        this.initializeElements();
+        this.initializeEventListeners();
+    }
 
-let computerSelection = Math.floor(Math.random() * getComputerChoice.length);
+    // Initialize DOM elements
+    initializeElements() {
+        this.buttons = document.querySelectorAll('.choice');
+        this.goButton = document.querySelector('.go');
+        this.againButton = document.querySelector('.again');
+        this.playerScoreDisplay = document.querySelector("#playerScore");
+        this.computerScoreDisplay = document.querySelector("#computerScore");
+        this.roundResult = document.querySelector("#roundResult");
+        this.gameResult = document.querySelector("#gameResult");
+        this.player = document.querySelector("#player");
+        this.computer = document.querySelector("#computer");
+        this.game = document.querySelector(".game");
+        
+        // Set initial scores
+        this.updateScoreDisplay();
+        this.disableChoiceButtons();
+    }
 
-function rules(computerSelection, playerSelection) {
-    
-    if (playerSelection == computerSelection) {
-        return 'Tie!';
-    } else if (playerSelection == 'rock') {
-        if (computerSelection == 'paper') {
-            return'You lost! Paper beats Rock';
-        } else {
-            return'You won! Rock beats Scissors';
-        }
-    } else if (playerSelection == 'paper') {
-        if (computerSelection == 'rock') {
-            return'You won! Paper beats Rock';
-        } else {
-             return'You lost! Scissors beat Paper';
+    // Initialize all event listeners
+    initializeEventListeners() {
+        this.buttons.forEach(button => {
+            button.addEventListener('click', () => this.handlePlayerChoice(button));
+            this.setupButtonHoverEffects(button);
+        });
+
+        this.goButton.addEventListener('click', () => this.startRound());
+        this.againButton.addEventListener('click', () => this.resetGame());
+        
+        // Setup hover effects for control buttons
+        [this.goButton, this.againButton].forEach(button => {
+            this.setupButtonHoverEffects(button, 'change', 'onAgain');
+        });
+
+        // Add keyboard listener for Enter key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                if (!this.goButton.hidden) {
+                    this.startRound();
+                } else if (!this.againButton.hidden) {
+                    this.resetGame();
+                }
             }
-    } else if (playerSelection == 'scissors') {
-        if (computerSelection == 'rock') {
-            return'You lost! Rock beats Scissors';
-        } else {
-            return'You won! Scissors beat Paper';
-        }
-    } else { 
-        return'Please choose either Rock, Paper or Scissors';
+        });
     }
-}
 
-const game = document.querySelector('.game');
-const buttons = document.querySelectorAll('.choice');
-buttons.forEach((button) => {
-    button.disabled = true;
-    button.addEventListener('click', () => {
-        playerSelection = button.value;
-        disableChoiceButton();
-        playGame();
-    })
+    // Setup hover effects for buttons
+    setupButtonHoverEffects(button, ...classes) {
+        button.addEventListener('mouseenter', () => {
+            if (!button.disabled || classes.length > 0) {
+                button.classList.add(...(classes.length ? classes : ['hover']));
+            }
+        });
+        button.addEventListener('mouseleave', () => {
+            button.classList.remove(...(classes.length ? classes : ['hover']));
+        });
+    }
 
-    button.addEventListener('mouseenter', () => {
-        button.classList.add('hover');
-        if (button.disabled == false) {
-            button.classList.add('hover');
-        } else if (button.disabled == true) {
-            button.classList.remove('hover');
-        }
-    })
-    button.addEventListener('mouseleave', () => {
-        button.classList.remove('hover');
-    })
-})
+    // Handle player's choice
+    handlePlayerChoice(button) {
+        const playerSelection = button.value;
+        this.disableChoiceButtons();
+        this.playRound(playerSelection);
+    }
 
-function disableChoiceButton(){
-    buttons.forEach(element => {
-        element.disabled=true;
-        
-    });
-}
+    // Get computer's choice
+    getComputerChoice() {
+        return this.choices[Math.floor(Math.random() * this.choices.length)];
+    }
 
-const go = document.querySelector('.go');
-const again = document.querySelector('.again');
+    // Determine round winner
+    determineWinner(playerChoice, computerChoice) {
+        if (playerChoice === computerChoice) return 'Tie!';
 
-again.addEventListener("mouseenter", () => {
-    again.classList.add("onAgain");
-});
-again.addEventListener("mouseleave", () => {
-    again.classList.remove("onAgain");
-})
-
-go.addEventListener("mouseenter", () => {
-    go.classList.add("change");
-});
-go.addEventListener("mouseleave", () => {
-    go.classList.remove("change");
-})
-
-let playerScoreIn = 0;
-let computerScoreIn = 0;
-let playerScore = document.querySelector("#playerScore");
-playerScore.textContent="0";
-let computerScore = document.querySelector("#computerScore");
-computerScore.textContent="0";
-    
-function playGame() {
-        console.log("first" + playerSelection);
-        let computerSelection = Math.floor(Math.random() * getComputerChoice.length);
-        console.log('computer choice ----- '+ getComputerChoice[computerSelection])
-        let result = rules( getComputerChoice[computerSelection], playerSelection);
-        console.log(result);
-        roundResult.textContent = result;
-
-        if (result.includes('won')) {
-            playerScoreIn += 1;
-            playerScore.textContent = playerScoreIn;
-        } else if (result.includes('lost')) {
-            computerScoreIn += 1;
-            computerScore.textContent = computerScoreIn;
+        const winConditions = {
+            rock: 'scissors',
+            paper: 'rock',
+            scissors: 'paper'
         };
-        
-        go.style.display = "inline-block";
-        player.textContent = playerSelection;
-        computer.textContent = getComputerChoice[computerSelection];
-        
-         if (playerScoreIn == 5) {
-            console.log('You won the game!');
-            gameResult.textContent = 'You won the game!';
-            again.removeAttribute("hidden");
-            go.style.display = "none";
-            buttons.forEach((button) => {
-                button.disabled = true;
-            })
-            game.classList.add("winner");
-            
-        } else if (computerScoreIn == 5) {
-            console.log('Game over. You lost!');
-            gameResult.textContent = 'Game over. You lost!';
-            again.removeAttribute("hidden");
-            go.style.display = "none";
-            buttons.forEach((button) => {
-                button.disabled = true;
-            })
-            game.classList.add("loser");
-        } 
+
+        if (winConditions[playerChoice] === computerChoice) {
+            return `You won! ${playerChoice} beats ${computerChoice}`;
+        }
+        return `You lost! ${computerChoice} beats ${playerChoice}`;
     }
 
-    go.addEventListener("click", function() {
-        go.style.display = "none";
-        buttons.forEach((button) => {
-            button.disabled = false;
-        })    
-    })
+    // Play a single round
+    playRound(playerSelection) {
+        const computerSelection = this.getComputerChoice();
+        const result = this.determineWinner(playerSelection, computerSelection);
+        
+        this.roundResult.textContent = result;
+        this.player.textContent = playerSelection;
+        this.computer.textContent = computerSelection;
+        
+        if (result.includes('won')) {
+            this.playerScore++;
+        } else if (result.includes('lost')) {
+            this.computerScore++;
+        }
+        
+        this.updateScoreDisplay();
+        this.checkGameEnd();
+        this.goButton.style.display = "inline-block";
+    }
 
-    again.addEventListener("click", function() {
-        playerScoreIn = 0;
-        computerScoreIn = 0;
-        playerScore.textContent = "0";
-        computerScore.textContent = "0";
-        again.setAttribute("hidden", true);
-        roundResult.textContent = '';
-        gameResult.textContent = '';
-        game.classList.remove("loser");
-        game.classList.remove("winner");
-        go.style.display = "inline-block";
-        player.textContent = "";
-        computer.textContent = "";
-    });
+    // Update score display
+    updateScoreDisplay() {
+        this.playerScoreDisplay.textContent = this.playerScore;
+        this.computerScoreDisplay.textContent = this.computerScore;
+    }
 
-    
+    // Enable/disable choice buttons
+    disableChoiceButtons() {
+        this.buttons.forEach(button => button.disabled = true);
+    }
+
+    enableChoiceButtons() {
+        this.buttons.forEach(button => button.disabled = false);
+    }
+
+    // Start a new round
+    startRound() {
+        this.goButton.style.display = 'none';
+        this.enableChoiceButtons();
+        this.roundResult.textContent = '';
+        this.gameResult.textContent = '';
+        this.player.textContent = "";
+        this.computer.textContent = "";
+    }
+
+    // Check if game has ended
+    checkGameEnd() {
+        if (this.playerScore === 5 || this.computerScore === 5) {
+            const winner = this.playerScore === 5 ? 'Player' : 'Computer';
+            this.gameResult.textContent = `Game Over! ${winner} wins!`;
+            this.againButton.hidden = false;
+            this.goButton.style.display = "none";
+            this.buttons.forEach((button) => {
+                button.disabled = true;
+            })
+            if (this.playerScore === 5) {
+                this.game.classList.add("winner");
+            } else {
+                this.game.classList.add("loser");
+            }
+        }
+    }
+
+    // Reset the game
+    resetGame() {
+        this.playerScore = 0;
+        this.computerScore = 0;
+        this.updateScoreDisplay();
+        this.roundResult.textContent = '';
+        this.gameResult.textContent = '';
+        this.goButton.style.display = 'block';
+        this.againButton.hidden = true;
+        this.disableChoiceButtons();
+        this.game.classList.remove("loser");
+        this.game.classList.remove("winner");
+    }
+}
+
+// Initialize the game when the DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+    new Game();
+});

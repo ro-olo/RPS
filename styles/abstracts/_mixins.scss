@@ -1,0 +1,48 @@
+// Layout mixins
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+// Button mixins
+@mixin button-base {
+  width: $button-size;
+  height: $button-size;
+  border: 2px solid $text-color;
+  cursor: pointer;
+  transition: all $transition-speed $transition-easing;
+  position: relative;
+  box-shadow: 0 5px 15px rgba($text-color, 0.2);
+}
+
+@mixin button-hover {
+  &:not(:disabled):hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba($text-color, 0.3);
+  }
+
+  &:not(:disabled):active {
+    transform: translateY(2px);
+    box-shadow: 0 3px 10px rgba($text-color, 0.1);
+  }
+
+  &:disabled {
+    opacity: 0.7;
+    cursor: default;
+  }
+}
+
+// Container mixin
+@mixin game-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 30px;
+  margin: 100px auto;
+  margin-top: 70px;
+  width: $container-width;
+  height: $container-height;
+  text-align: center;
+}

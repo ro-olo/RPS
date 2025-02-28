@@ -1,0 +1,128 @@
+* {
+  font-family: Verdana, Tahoma, sans-serif;
+  color: white;
+  background-color: #000000;
+}
+
+.game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 30px;
+  margin: 100px auto;
+  margin-top: 70px;
+  width: 500px;
+  height: 500px;
+  border: 2px solid white;
+  border-radius: 15px;
+  text-align: center;
+}
+.game.winner {
+  border-color: rgb(0, 255, 0) !important;
+}
+.game.loser {
+  border-color: rgb(255, 0, 0) !important;
+}
+
+.selection {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 70px;
+  margin-top: 40px;
+  margin-bottom: 30px;
+}
+
+button {
+  width: 100px;
+  height: 100px;
+  border: 2px solid white;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  position: relative;
+  box-shadow: 0 5px 15px rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  background-color: blueviolet;
+}
+button:not(:disabled):hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(255, 255, 255, 0.3);
+}
+button:not(:disabled):active {
+  transform: translateY(2px);
+  box-shadow: 0 3px 10px rgba(255, 255, 255, 0.1);
+}
+button:disabled {
+  opacity: 0.7;
+  cursor: default;
+}
+
+button#R {
+  background-image: url(../images/rock.jpg);
+  background-size: cover;
+}
+
+button#P {
+  background-image: url(../images/paper.jpg);
+  background-size: cover;
+}
+
+button#S {
+  background-image: url(../images/scissors.jpg);
+  background-size: cover;
+}
+
+.match {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  margin: 10px 0;
+}
+
+.scores {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 50px;
+  margin: 10px 0;
+}
+
+.results {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin: 10px 0;
+}
+.results #roundResult, .results #gameResult {
+  margin: 5px 0;
+  font-size: 1.1em;
+  word-wrap: break-word;
+  max-width: 100%;
+  padding: 0 20px;
+}
+
+.control-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  margin-top: 10px;
+}
+.control-buttons .go, .control-buttons .again {
+  padding: 10px 20px;
+  height: auto;
+  width: auto;
+  border-radius: 25px;
+  font-weight: bold;
+}
+.control-buttons .go:hover, .control-buttons .again:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(0, 255, 0, 0.2);
+}
+.control-buttons .go:active, .control-buttons .again:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 8px rgba(0, 255, 0, 0.1);
+}

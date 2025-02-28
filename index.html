@@ -1,38 +1,38 @@
 <!DOCTYPE html>
-<html lang = "en">
-  <title>Rock Paper Scissors</title>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Rock, Paper, Scissor</title>
-  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A fun Rock Paper Scissors game">
+  <title>Rock Paper Scissors</title>
+  <link rel="stylesheet" href="css/style.css">
 </head>
-  <body>
-   <script src="javascript.js" defer>
-   </script>
-    <div class="game">
-      <h1>Rock, Paper or Scissors?</h1>
-        <div class="selection">
-          <button class="choice" id="R" value="rock"></button>
-          <button class="choice" id="P" value="paper"></button>
-          <button class="choice" id="S" value="scissors"></button>
-        </div>
-        <div class="match">
-          <div id="player"></div>
-          <div class="vs"> VS </div>
-          <div id="computer"></div>
-        </div>
-        <div class="scores">
-          <div class="playerScore">Player: <span id="playerScore"></span></div>
-          <div class="computerScore">Computer: <span id="computerScore"></span></div>
-        </div>
-        <div class="results">
-          <div id="roundResult"></div>
-          <div id="gameResult"></div>
-          <button class="again" hidden="true">Play Again</button>
-        </div>
-        <div class="goButton">
-          <button class="go">Play Round</button>
-        </div>
-   </div>
-  </body>
+<body>
+  <main class="game">
+    <h1>Rock, Paper or Scissors?</h1>
+    <div class="selection" role="group" aria-label="Game choices">
+      <button class="choice" id="R" value="rock" aria-label="Choose Rock"></button>
+      <button class="choice" id="P" value="paper" aria-label="Choose Paper"></button>
+      <button class="choice" id="S" value="scissors" aria-label="Choose Scissors"></button>
+    </div>
+    <div class="match" aria-live="polite">
+      <div id="player" role="status"></div>
+      <div class="vs" aria-hidden="true">VS</div>
+      <div id="computer" role="status"></div>
+    </div>
+    <div class="scores">
+      <div class="playerScore" role="status" aria-live="polite">Player: <span id="playerScore"></span></div>
+      <div class="computerScore" role="status" aria-live="polite">Computer: <span id="computerScore"></span></div>
+    </div>
+    <div class="results">
+      <div id="roundResult" role="alert"></div>
+      <div id="gameResult" role="alert"></div>
+      <div class="control-buttons">
+        <button class="again" hidden="true">Play Again</button>
+        <button class="go">Play Round</button>
+      </div>
+    </div>
+  </main>
+  <script src="javascript.js" defer></script>
+</body>
 </html>

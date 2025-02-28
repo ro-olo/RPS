@@ -1,0 +1,9 @@
+// Base reset styles
+* {
+  font-family: Verdana, Tahoma, sans-serif;
+  color: $text-color;
+  background-color: $primary-color;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
